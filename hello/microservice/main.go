@@ -1,0 +1,17 @@
+package main
+
+import (
+	"log"
+	"net/http"
+	"os"
+	handlers ".`/handlers"
+)
+
+func main() {
+	l := log.New(os.Stdout, "product-api", log.LstdFlags)
+	hh := handlers.NewHello(l)
+
+	sm := http.NewServeMux()
+	sm.Handler("/", hh)
+	http.ListenAndServe(":9090", sm)
+}
